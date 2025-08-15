@@ -2,5 +2,5 @@
 
 public interface ISecureShellService
 {
-    
+    Task<string> GetWireGuardStatistics(CancellationToken cancellationToken = default);
 }

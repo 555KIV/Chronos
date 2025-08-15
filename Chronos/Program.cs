@@ -1,4 +1,5 @@
 using Chronos.Extensions;
+using Chronos.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 

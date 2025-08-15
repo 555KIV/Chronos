@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chronos.Services", "Chronos
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chronos.Models", "Chronos.Models\Chronos.Models.csproj", "{F39180A6-2599-4B27-8F05-7A1ED0F05FF1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chronos.Repositories", "Chronos.Repositories\Chronos.Repositories.csproj", "{783878A4-FDF2-4814-9407-E9C4B693AFBA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{F39180A6-2599-4B27-8F05-7A1ED0F05FF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F39180A6-2599-4B27-8F05-7A1ED0F05FF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F39180A6-2599-4B27-8F05-7A1ED0F05FF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{783878A4-FDF2-4814-9407-E9C4B693AFBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{783878A4-FDF2-4814-9407-E9C4B693AFBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{783878A4-FDF2-4814-9407-E9C4B693AFBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{783878A4-FDF2-4814-9407-E9C4B693AFBA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

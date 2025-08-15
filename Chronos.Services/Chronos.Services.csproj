@@ -11,10 +11,12 @@
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.8" />
       <PackageReference Include="Microsoft.Extensions.Options" Version="9.0.8" />
       <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.0.8" />
+      <PackageReference Include="SSH.NET" Version="2025.0.0" />
     </ItemGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\Chronos.Models\Chronos.Models.csproj" />
+        <ProjectReference Include="..\Chronos.Repositories\Chronos.Repositories.csproj" />
     </ItemGroup>
     
 </Project>
