@@ -11,9 +11,9 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddChronosServices(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddSingleton<ISecureShellService, SecureShellService>();
-        services.AddSingleton<IParsingService, ParsingService>();
-        services.AddSingleton<IChronosService, ChronosService>();
+        services.AddScoped<ISecureShellService, SecureShellService>();
+        services.AddScoped<IParsingService, ParsingService>();
+        services.AddScoped<IChronosService, ChronosService>();
 
         services.AddRepositories();
         services.AddSettings();

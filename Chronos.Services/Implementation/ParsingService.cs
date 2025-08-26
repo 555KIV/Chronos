@@ -12,6 +12,9 @@ public class ParsingService : IParsingService
     private readonly Regex _wireGuardIpRegex = new(@"allowed ips: (?<ip>\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})");
     private readonly Regex _handshakeRegex = new (@"latest handshake: (?:(?<day>\d*) days?)?\W*?(?:(?<hour>\d*) hours?)?\W*?(?:(?<minute>\d*) minutes?)?\W*?(?:(?<seconds>\d*) seconds? ago)");
     private readonly Regex _trafficRegex = new (@"transfer: (?<received_vol>\d*\.\d*) (?<received_type>(?:M|G)iB) received, (?<sent_vol>\d*\.\d*) (?<sent_type>(?:M|G)iB)");
+  
+    private readonly Regex _clientName = new(@"wg\d+-client-(?<clientName>.*)\.conf");
+    private readonly Regex _clientAddress = new(@"Address = (?<address>\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})");
     
     public IEnumerable<WgClientStat> GetClientStats(IEnumerable<string> clientData)
     {
@@ -40,6 +43,12 @@ public class ParsingService : IParsingService
         
         return listStats;
     }
+    
+    public IEnumerable<(string ClientName, string Address)> GetClients(Dictionary<string, string> confClients)
+    {
+        return confClients.Select(client => (_clientName.Match(client.Key).Groups["clientName"].Value, _clientAddress.Match(client.Value).Groups["address"].Value)).ToList();
+    }
+
 
     private TimeSpan GetLatestHandshake(string str)
     {

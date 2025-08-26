@@ -11,6 +11,8 @@ public static class ServiceCollectionExtensions
     {
         services.AddDbContext<ChronosDbContext>(x => x.UseSqlite("Data Source=Chronos.db"));
         services.AddScoped<IClientsRepository, ClientsRepository>();
+        services.AddScoped<ISpentTrafficRepository, SpentTrafficRepository>();
+        services.AddScoped<IFamilyRepository, FamilyRepository>();
         
         return services;
     }
