@@ -1,12 +1,21 @@
-﻿namespace Chronos.Models.Entities;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
+namespace Chronos.Models.Entities;
+
+[Table("spent_traffic")]
 public class SpentTrafficEntity
 {
     public int Id { get; set; }
     public int ClientId { get; set; }
-    public decimal TrafficVolume => ReceivedVolume + SentVolume;
-    public decimal ReceivedVolume { get; set; }
-    public decimal SentVolume { get; set; }
+    
+    public decimal TrafficVolumeAll => ReceivedVolumeAll + SentVolumeAll;
+    public decimal ReceivedVolumeAll { get; set; }
+    public decimal SentVolumeAll { get; set; }
+    
+    public decimal ReceivedVolumePerDay { get; set; }
+    public decimal SentVolumePerDay { get; set; }
+    public decimal TrafficVolumePerDay => ReceivedVolumePerDay + SentVolumePerDay;
+    
     public DateTime Date {get;set;}
     public DateTime CreatedDate { get; set; }
     

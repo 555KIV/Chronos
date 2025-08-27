@@ -5,18 +5,15 @@ using Renci.SshNet;
 
 namespace Chronos.Services.Implementation;
 
-public class SecureShellService : ISecureShellService
+public class SecureShellService(IOptions<SecureShellOptions> options) : ISecureShellService
 {
-    private readonly SecureShellOptions _options;
+    private readonly SecureShellOptions _options = options.Value;
 
-    public SecureShellService(IOptions<SecureShellOptions> options)
-    {
-        _options = options.Value;
-    }
-
-    public async Task<string> GetWireGuardStatistics(CancellationToken cancellationToken = default) => await RunCommandAsync("wg show all", cancellationToken);
+    public async Task<string> GetWireGuardStatisticsAsync(CancellationToken cancellationToken = default) => await RunCommandAsync("wg show all", cancellationToken);
     
-    public async Task<Dictionary<string, string>> GetClients(CancellationToken cancellationToken = default)
+    public async Task<string> GetUpTimeAsync(CancellationToken cancellationToken = default) => await RunCommandAsync("uptime -s", cancellationToken);
+    
+    public async Task<Dictionary<string, string>> GetClientsAsync(CancellationToken cancellationToken = default)
     {
         var clientDictionary = new Dictionary<string, string>();
         

@@ -2,6 +2,7 @@
 
 public interface ISecureShellService
 {
-    Task<string> GetWireGuardStatistics(CancellationToken cancellationToken = default);
-    Task<Dictionary<string, string>> GetClients(CancellationToken cancellationToken = default);
+    Task<string> GetWireGuardStatisticsAsync(CancellationToken cancellationToken = default);
+    Task<Dictionary<string, string>> GetClientsAsync(CancellationToken cancellationToken = default);
+    Task<string> GetUpTimeAsync(CancellationToken cancellationToken = default);
 }
