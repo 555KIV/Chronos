@@ -9,6 +9,8 @@ public class ClientEntity
     public string ClientName { get; set; }
     public string IpAddress { get; set; }
     public int? FamilyId { get; set; }
+    public DateTime? LastHandshake { get; set; }
+    
     public DateTime CreatedDate { get; set; }
     
     public FamilyEntity? Family { get; set; }

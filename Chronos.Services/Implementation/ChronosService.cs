@@ -20,11 +20,11 @@ public class ChronosService(
 
         var clients = await clientsRepository.GetAllAsync();
 
-        var utcNow = DateTime.UtcNow;
+        var now = DateTime.Now;
 
         var lastTraffic = await spentTrafficRepository.GetLastRecAsync();
         var averageTraffic = await spentTrafficRepository.GetAverageLastMonthAsync();
-        var uptime = DateTime.Now - DateTime.Parse(await secureShellService.GetUpTimeAsync());
+        var uptime = now - DateTime.Parse(await secureShellService.GetUpTimeAsync());
 
         var clientStats = clients.Join(parsStats, entity => entity.IpAddress, stat => stat.WireGuardIp, (entity, stat) =>
             {
@@ -38,13 +38,16 @@ public class ChronosService(
                     SentVolumePerDay = CalcStat(stat.SentTraffic, lastStat?.SentVolumeAll, averageStat.Sent, uptime),
                     ReceivedVolumeAll = stat.ReceivedTraffic,
                     ReceivedVolumePerDay = CalcStat(stat.ReceivedTraffic, lastStat?.ReceivedVolumeAll, averageStat.Received, uptime),
-                    Date = new DateTime(utcNow.Year, utcNow.Month, utcNow.Day),
-                    CreatedDate = utcNow,
+                    Date = new DateTime(now.Year, now.Month, now.Day),
+                    CreatedDate = now,
                     Client = entity
                 };
             });
 
         await spentTrafficRepository.AddAsync(clientStats);
+
+        await clientsRepository.UpdateHandshakeAsync(parsStats.Where(x => x.LatestHandshake != TimeSpan.Zero).ToDictionary(x => x.WireGuardIp,
+            y => now - y.LatestHandshake));
     }
 
     public async Task CreateClientsAsync()
@@ -53,9 +56,9 @@ public class ChronosService(
 
         var parsClient = parsingService.GetClients(rawClients);
 
-        var utcNow = DateTime.UtcNow;
+        var utcNow = DateTime.Now;
 
-        await clientsRepository.AddAsync(parsClient.Select(x => new ClientEntity()
+        await clientsRepository.UpsertAsync(parsClient.Select(x => new ClientEntity()
         {
             ClientName = x.ClientName,
             IpAddress = x.Address,

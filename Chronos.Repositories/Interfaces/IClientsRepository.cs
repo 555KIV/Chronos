@@ -8,4 +8,6 @@ public interface IClientsRepository
     Task AddAsync(ClientEntity entity);
     Task<ClientEntity?> GetAsync(int id);
     Task<IEnumerable<ClientEntity>> GetAllAsync();
+    Task UpdateHandshakeAsync(Dictionary<string, DateTime> updates);
+    Task UpsertAsync(IEnumerable<ClientEntity> clients);
 }
